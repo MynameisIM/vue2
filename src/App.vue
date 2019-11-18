@@ -1,14 +1,15 @@
 <template>
-  <div>
-    <h1>Parent: {{ carName }}</h1>
-    <app-counter :counter="counter"></app-counter>
-    <app-car :carName="carName"
-             :carYear="carYear"
-             :counter="counter"
-             :changeFunc="changeNameToAudi"
-             @changeName="carName = $event"
-             @counterUpdated="counter = $event"></app-car>
-  </div>
+  <h2 v-colored>{{ title }}</h2>
+  <!--<div>-->
+    <!--<h1>Parent: {{ carName }}</h1>-->
+    <!--<app-counter :counter="counter"></app-counter>-->
+    <!--<app-car :carName="carName"-->
+             <!--:carYear="carYear"-->
+             <!--:counter="counter"-->
+             <!--:changeFunc="changeNameToAudi"-->
+             <!--@changeName="carName = $event"-->
+             <!--@counterUpdated="counter = $event"></app-car>-->
+  <!--</div>-->
 </template>
 
 <script>
@@ -19,9 +20,10 @@ export default {
   name: 'app',
   data () {
     return {
-      carName: 'Ford from parent',
-      carYear: 2018,
-      counter: 0
+      // carName: 'Ford from parent',
+      // carYear: 2018,
+      // counter: 0
+      title: 'Hello Vue'
     }
   },
   methods: {
