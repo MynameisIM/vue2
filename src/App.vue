@@ -1,5 +1,9 @@
 <template>
-  <h2 v-colored>{{ title }}</h2>
+  <div>
+    <h2 v-colored:background.font="'green'">{{ title }}</h2>
+    <h2 v-colored:color.delay="'blue'">{{ title }}</h2>
+    <h2 v-font>{{ title }}</h2>
+  </div>
   <!--<div>-->
     <!--<h1>Parent: {{ carName }}</h1>-->
     <!--<app-counter :counter="counter"></app-counter>-->
@@ -24,6 +28,13 @@ export default {
       // carYear: 2018,
       // counter: 0
       title: 'Hello Vue'
+    }
+  },
+  directives: {
+    font: {
+      bind(el, bindings, vnode) {
+        el.style.fontSize = '50px';
+      }
     }
   },
   methods: {
