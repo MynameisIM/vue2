@@ -1,8 +1,11 @@
 <template>
   <div>
-    <h2 v-colored:background.font="'green'">{{ title }}</h2>
-    <h2 v-colored:color.delay="'blue'">{{ title }}</h2>
-    <h2 v-font>{{ title }}</h2>
+    <!--<h2 v-colored:background.font="'green'">{{ title }}</h2>-->
+    <!--<h2 v-colored:color.delay="'blue'">{{ title }}</h2>-->
+    <!--<h2 v-font>{{ title }}</h2>-->
+    <h2>{{ title }}</h2>
+    <h2>{{ title | lowercase }}</h2>
+    <h2>{{ title | uppercase }}</h2>
   </div>
   <!--<div>-->
     <!--<h1>Parent: {{ carName }}</h1>-->
@@ -28,6 +31,11 @@ export default {
       // carYear: 2018,
       // counter: 0
       title: 'Hello Vue'
+    }
+  },
+  filters: {
+    lowercase(value) {
+      return value.toLowerCase();
     }
   },
   directives: {
