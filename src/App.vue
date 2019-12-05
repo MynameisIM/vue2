@@ -1,58 +1,36 @@
 <template>
-  <div>
-    <!--<h2 v-colored:background.font="'green'">{{ title }}</h2>-->
-    <!--<h2 v-colored:color.delay="'blue'">{{ title }}</h2>-->
-    <!--<h2 v-font>{{ title }}</h2>-->
-    <h2>{{ title }}</h2>
-    <h2>{{ title | lowercase }}</h2>
-    <h2>{{ title | uppercase }}</h2>
+  <div class="container">
+    <form action="" class="pt-3">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email"
+               id="email"
+               class="form-control"
+               :class="{ 'is-invalid': $v.email.$error, 'is-valid': !$v.email.$invalid }"
+               v-model="email"
+               @blur="$v.email.$touch()">
+        <div class="invalid-feedback" v-if="!$v.email.required">Email field is required</div>
+        <div class="invalid-feedback" v-if="!$v.email.email">This field should be an email</div>
+      </div>
+    </form>
   </div>
-  <!--<div>-->
-    <!--<h1>Parent: {{ carName }}</h1>-->
-    <!--<app-counter :counter="counter"></app-counter>-->
-    <!--<app-car :carName="carName"-->
-             <!--:carYear="carYear"-->
-             <!--:counter="counter"-->
-             <!--:changeFunc="changeNameToAudi"-->
-             <!--@changeName="carName = $event"-->
-             <!--@counterUpdated="counter = $event"></app-car>-->
-  <!--</div>-->
 </template>
 
 <script>
-import Car from './components/Car.vue'
-import Counter from './components/Counter.vue'
+import { required, email } from 'vuelidate/lib/validators';
 
 export default {
   name: 'app',
   data () {
     return {
-      // carName: 'Ford from parent',
-      // carYear: 2018,
-      // counter: 0
-      title: 'Hello Vue'
+      email: ''
     }
   },
-  filters: {
-    lowercase(value) {
-      return value.toLowerCase();
+  validations: {
+    email: {
+      required,
+      email,
     }
-  },
-  directives: {
-    font: {
-      bind(el, bindings, vnode) {
-        el.style.fontSize = '50px';
-      }
-    }
-  },
-  methods: {
-    changeNameToAudi() {
-      this.carName = 'audi';
-    }
-  },
-  components: {
-    'app-car': Car,
-    'app-counter': Counter,
   }
 }
 </script>
