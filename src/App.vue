@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form action="" class="pt-3">
+    <form action="" class="pt-3" @submit.prevent="onSubmit">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email"
@@ -11,6 +11,7 @@
                @blur="$v.email.$touch()">
         <div class="invalid-feedback" v-if="!$v.email.required">Email field is required</div>
         <div class="invalid-feedback" v-if="!$v.email.email">This field should be an email</div>
+        <div class="invalid-feedback" v-if="!$v.email.uniqEmail">This email is already exist</div>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -36,6 +37,8 @@
           Password should match
         </div>
       </div>
+      <button class="btn btn-success" type="submit"
+              :disabled="$v.$invalid">Submit</button>
     </form>
   </div>
 </template>
@@ -52,10 +55,25 @@ export default {
       confirmPassword: ''
     }
   },
+  methods: {
+    onSubmit() {
+      console.log('Email', this.email);
+      console.log('Password', this.password);
+    }
+  },
   validations: {
     email: {
       required,
-      email
+      email,
+      uniqEmail: function (newEmail) {
+        if (newEmail === '') return true;
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            const value = newEmail !== 'test@mail.ru';
+            resolve(value);
+          }, 1000);
+        })
+      },
     },
     password: {
       minLength: minLength(6)
